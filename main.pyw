@@ -1,6 +1,7 @@
 import os
 import sched
 import time
+import paths  # absolute paths, change below as necessary
 
 
 def scandir(s, base_directory: str, target_directory: str, extensions: tuple):
@@ -42,15 +43,15 @@ def schedule_scandir(s, base_directory: str, target_directory: str, extensions: 
 
 
 if __name__ == '__main__':
-    main_path = "C:/Users/kunal/Downloads/"  # directory that will be scanned
+    main_path = paths.main_path  # directory that will be scanned for files
 
-    images_path = "C:/Users/kunal/Downloads/Images/"
+    images_path = paths.images_path  # the directory images are sorted into
     image_extensions = (".png", ".jpg", ".jpeg", ".jif", ".jfif", ".pjpeg", ".jfi", ".jpe", ".pjp", ".svg", ".svgz",
                         ".webp", ".ico", ".tif", ".tiff", ".bmp", ".apng", ".avif", ".heif", ".heic", ".eps", ".ai",
                         ".psd", ".gif")
     makedir(images_path)
 
-    videos_path = "C:/Users/kunal/Downloads/Videos/"
+    videos_path = paths.videos_path  # the directory videos are sorted into
     video_extensions = (".webm", ".mkv", ".flv", ".vob", ".ogg", ".ogv", ".avi", ".MTS", ".M2TS", ".TS", ".mov", ".qt",
                         ".wmv", ".amv", ".mp4", ".m4p", ".m4v", ".mpg", ".mp2", ".mpeg", ".mpe", ".mpv", ".m2v")
     makedir(videos_path)
