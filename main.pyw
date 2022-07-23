@@ -4,7 +4,7 @@ import time
 
 
 def scandir(s, base_directory: str, target_directory: str, extensions: tuple):
-    s.enter(5, 1, scandir, argument=(s, base_directory, target_directory, extensions))
+    s.enter(7, 1, scandir, argument=(s, base_directory, target_directory, extensions))
     print("Scanning directory "+base_directory+" and moving files to "+target_directory)
     for entry in os.listdir(base_directory):
         entry_base_path = os.path.join(base_directory, entry)
@@ -39,7 +39,6 @@ def makedir(*pathname):
 def schedule_scandir(s, base_directory: str, target_directory: str, extensions: tuple):
     print(time.ctime())
     s.enter(7, 1, scandir, argument=(s, base_directory, target_directory, extensions))
-    s.run()
 
 
 if __name__ == '__main__':
@@ -58,3 +57,5 @@ if __name__ == '__main__':
 
     scheduler = sched.scheduler(time.time, time.sleep)
     schedule_scandir(scheduler, main_path, images_path, image_extensions)
+    schedule_scandir(scheduler, main_path, videos_path, video_extensions)
+    scheduler.run()
