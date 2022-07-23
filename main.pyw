@@ -44,11 +44,17 @@ def schedule_scandir(s, base_directory: str, target_directory: str, extensions: 
 
 if __name__ == '__main__':
     main_path = "C:/Users/kunal/Downloads/"  # directory that will be scanned
+
     images_path = "C:/Users/kunal/Downloads/Images/"
     image_extensions = (".png", ".jpg", ".jpeg", ".jif", ".jfif", ".pjpeg", ".jfi", ".jpe", ".pjp", ".svg", ".svgz",
                         ".webp", ".ico", ".tif", ".tiff", ".bmp", ".apng", ".avif", ".heif", ".heic", ".eps", ".ai",
-                        ".psd")
+                        ".psd", ".gif")
     makedir(images_path)
+
+    videos_path = "C:/Users/kunal/Downloads/Videos/"
+    video_extensions = (".webm", ".mkv", ".flv", ".vob", ".ogg", ".ogv", ".avi", ".MTS", ".M2TS", ".TS", ".mov", ".qt",
+                        ".wmv", ".amv", ".mp4", ".m4p", ".m4v", ".mpg", ".mp2", ".mpeg", ".mpe", ".mpv", ".m2v")
+    makedir(videos_path)
 
     scheduler = sched.scheduler(time.time, time.sleep)
     schedule_scandir(scheduler, main_path, images_path, image_extensions)
