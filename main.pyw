@@ -4,8 +4,8 @@ import time
 import paths  # absolute paths, change below as necessary
 
 
-def scandir(s, base_directory: str, target_directory: str, extensions: tuple):
-    s.enter(7, 1, scandir, argument=(s, base_directory, target_directory, extensions))
+def scandir(s, interval, base_directory: str, target_directory: str, extensions: tuple):
+    s.enter(interval, 1, scandir, argument=(s, base_directory, target_directory, extensions))
     print("Scanning directory "+base_directory+" and moving files to "+target_directory)
     for entry in os.listdir(base_directory):
         entry_base_path = os.path.join(base_directory, entry)
@@ -37,9 +37,9 @@ def makedir(*pathname):
     return path
 
 
-def schedule_scandir(s, base_directory: str, target_directory: str, extensions: tuple):
+def schedule_scandir(s, interval, base_directory: str, target_directory: str, extensions: tuple):
     print(time.ctime())
-    s.enter(7, 1, scandir, argument=(s, base_directory, target_directory, extensions))
+    s.enter(interval, 1, scandir, argument=(s, interval, base_directory, target_directory, extensions))
 
 
 if __name__ == '__main__':
@@ -57,6 +57,7 @@ if __name__ == '__main__':
     makedir(videos_path)
 
     scheduler = sched.scheduler(time.time, time.sleep)
-    schedule_scandir(scheduler, main_path, images_path, image_extensions)
-    schedule_scandir(scheduler, main_path, videos_path, video_extensions)
+    scan_interval = 7  # in seconds
+    schedule_scandir(scheduler, scan_interval, main_path, images_path, image_extensions)
+    schedule_scandir(scheduler, scan_interval, main_path, videos_path, video_extensions)
     scheduler.run()
